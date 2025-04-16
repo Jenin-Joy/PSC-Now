@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" cellpadding="10">
+        <tr>
+            <td>#</td>
+            <td>User</td>
+            <td>Examination</td>
+            <td>Total</td>
+            <td>Scored</td>
+        </tr>
+        {% for i in user %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.user_name }}</td>
+            <td>{{ i.tbl_examinationbody_set.first.examination.examination_name }}</td>
+            <td>{{ i.tbl_examinationbody_set.first.examination.examination_mark }}</td>
+            <td>{{ i.tbl_examinationbody_set.first.total_marks }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

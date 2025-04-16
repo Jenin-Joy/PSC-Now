@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #6c63ff;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            color: #555;
+        }
+
+        img {
+            border-radius: 50%;
+            width: 120px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        /* Edit Profile Button Style */
+        .edit-profile {
+            background-color: #4CAF50;
+        }
+
+        .edit-profile:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        /* Change Password Button Style */
+        .change-password {
+            background-color: #ff5722;
+        }
+
+        .change-password:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .profile-row {
+            background-color: #f9f9f9;
+        }
+
+        .table-header {
+            background-color: #6387ff;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Teacher Profile</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table border="1">
+                <tr class="table-header">
+                    <td colspan="2">
+                        <img src="{{ Teacher.teacher_photo.url }}" alt="teacher photo">
+                    </td>
+                </tr>
+                <tr class="profile-row">
+                    <td>Name</td>
+                    <td>{{ Teacher.teacher_name }}</td>
+                </tr>
+                <tr class="profile-row">
+                    <td>Email</td>
+                    <td>{{ Teacher.teacher_email }}</td>
+                </tr>
+                <tr class="profile-row">
+                    <td>Contact</td>
+                    <td>{{ Teacher.teacher_contact }}</td>
+                </tr>
+                <tr class="profile-row">
+                    <td>Address</td>
+                    <td>{{ Teacher.teacher_address }}</td>
+                </tr>
+                <tr class="actions">
+                    <td colspan="2">
+                        <a href="{% url 'Teacher:EditProfile' %}" class="edit-profile">Edit Profile</a>
+                        <a href="{% url 'Teacher:ChangePassword' %}" class="change-password">Change Password</a>
+                        {% if Teacher.teacher_class_status == 0 %}
+                        <a href="{% url 'Teacher:startclass' 1 %}" class="change-password">Start Class</a>
+                        {% else %}
+                        <a href="{% url 'Teacher:startclass' 0 %}" class="change-password">End Class</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassVideos</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>SNO</td>
+            <td>Class Title</td>
+            <td>Descrption</td>
+            <td>File</td>
+        </tr>
+        {% for i in classes %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.class_title}}</td>
+            <td>{{i.class_desc}}</td>
+            <td><a href="{{i.class_file.url}}">View File</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examination Results</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container for the Table */
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        td {
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        tr:hover td {
+            background-color: #e3f2fd;
+        }
+
+        /* Action Button Styles */
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #4CAF50;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        /* Status Text Styles */
+        .status {
+            padding: 6px 12px;
+            border-radius: 5px;
+        }
+
+        .completed {
+            background-color: #8BC34A;
+            color: white;
+        }
+
+        .not-started {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .exam-completed {
+            background-color: #f44336;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #333;">Examination List</h1>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Mark</th>   
+                <th>Question No</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+            {% for i in exam %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.examination_name }}</td>
+                <td>{{ i.examination_mark }}</td>
+                <td>{{ i.examination_qno }}</td>
+                <td>{{ i.examination_time }}</td>
+                <td>
+                    {% if i.examstatus %}
+                        <span class="status completed">You Completed This Examination | <a href="{% url 'User:viewresult' i.id %}">View Result</a></span>
+                    {% else %}
+                        {% if i.examination_status == 1 %}
+                            <a href="{% url 'User:viewquestion' i.id %}">Enter To Exam</a>
+                        {% elif i.examination_status == 2 %}
+                            <span class="status exam-completed">Exam Completed</span> <a href="{% url 'User:viewresult' i.id %}">View Result</a>
+                        {% else %}
+                            <span class="status not-started">Exam Not Started</span>
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

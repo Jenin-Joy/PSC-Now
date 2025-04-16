@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Mark</th>   
+            <th>Qustion No</th>
+            <th>Start Time</th>
+            <th>Time</th>
+            <th>Action</th>
+  
+        </tr>
+            {% for i in exam %}
+            <tr>
+             <td>{{forloop.counter}}</td>
+             <td>{{i.examination_name}}</td> 
+             <td>{{i.examination_mark}}</td>  
+             <td>{{i.examination_qno}}</td>    
+             <td>{{i.start_time}}</td> 
+             <td>{{i.examination_time}}</td> 
+             <td>
+                {% if i.examination_status == 1 %}
+                On Going | <a href="{% url 'Teacher:completeexam' i.id %}">Complete</a>
+                {% else %}
+                Examination Completed | <a href="{% url 'Teacher:viewresult' i.id %}">View Result</a> | <a href="{% url 'Teacher:viewranklist' i.id %}">View Rank List</a>
+                {% endif %}
+             </td>
+      
+             
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

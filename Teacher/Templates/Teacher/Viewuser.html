@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Students</h3>
+        <table border="1">
+            
+            <tr>
+                <td>sl</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>Photo</td>
+                <td>Contact</td>
+                <td>Action</td>
+            </tr>
+            {% for i in user %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.user_name}}</td>
+                <td>{{i.user_email}}</td>
+                <td>{{i.user_address}}</td>
+                <td><img src="{{ i.user_photo.url }}" alt="user photo"
+                    style="width:100px;height: auto;"></td>
+                <td>{{i.user_contact}}</td>
+                <td><a href="{% url 'Teacher:chatpage' i.id %}">Chat</a></td>
+                 
+            </tr>
+            {% endfor %}
+
+        </table>
+
+
+
+        
+    </form>
+
+   
+</body>

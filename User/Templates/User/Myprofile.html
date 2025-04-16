@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 80%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #6c63ff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        td img {
+            width: 120px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        td a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #6c63ff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 15px;
+            text-align: center;
+        }
+
+        td a:hover {
+            background-color: #5a54e1;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1>User Profile</h1>
+    </div>
+    <table>
+        <tr>
+            <td colspan="2" align="center">
+                <img src="{{ user.user_photo.url }}" alt="User Photo">
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Name</strong></td>
+            <td>{{ user.user_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email</strong></td>
+            <td>{{ user.user_email }}</td>
+        </tr>
+        <tr>
+            <td><strong>Contact</strong></td>
+            <td>{{ user.user_contact }}</td>
+        </tr>
+        <tr>
+            <td><strong>Address</strong></td>
+            <td>{{ user.user_address }}</td>
+        </tr>
+        <tr>
+            <td><strong>District</strong></td>
+            <td>{{ user.place.district.district_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Place</strong></td>
+            <td>{{ user.place.place_name }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <a href="{% url 'User:EditProfile' %}">Edit Profile</a>
+                <a href="{% url 'User:ChangePassword' %}">Change Password</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'Teacher/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studymaterials</title>
+</head>
+<body>
+    <form  enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name" id="name"></td>
+            </tr>
+            <tr>
+                <td>Details</td>
+                <td><input type="text" name="details" id="email"></td>
+            </tr>
+            
+           
+            <tr>
+                <td>File</td>
+                <td><input type="file" name="file_photo"/></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2"><input type="submit" value="Add"></td>
+            </tr>
+        </table>
+        <table border="1">
+            
+            <tr>
+                <td>sl</td>
+                <td>Name</td>
+                <td>Details</td>
+                <td>File</td>
+                <td>Action</td>
+                   
+            </tr>
+            {% for result in result %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{result.studymaterials_name}}</td>
+            <td>{{result.studymaterials_details}}</td>
+            <td><img src="{{result.studymaterials_file.url}}" width="100px" alt=""></td>
+            <td><a href="{% url 'Teacher:smdelete' result.id %}">Delete</a></td>
+        </tr>
+        
+        {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

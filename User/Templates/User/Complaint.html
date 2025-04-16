@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> User Complaints</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <table border="2" align="center">
+    
+        <tr>
+            <td>Title</td>
+            <td><input type="text" name="txt_title"></td>
+        </tr>
+        <tr>
+            <td>Content</td>
+            <td><textarea name="text_content" id="text_content"></textarea></td>
+        </tr>
+
+           
+            <td><input type="submit" name="btnsubmit" value="submit"></td>
+        </tr>
+    </table><br>
+    <br>
+    <br>
+    <table border="2" align="center">
+        <tr>
+            <th>#</th>
+        
+            <th>Title</th>
+        
+            <th>
+                Content
+            </th>
+            
+           
+            <th>
+                Reply
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+       
+        {% for i in result %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.complaint_title}}</td>
+            <td>{{i.complaint_content}}</td>
+            <td>{{i.complaint_reply}}</td>
+            <td><a href="{% url 'User:deluser' i.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

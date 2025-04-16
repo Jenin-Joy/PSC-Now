@@ -1,0 +1,154 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6c63ff;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], input[type="contact"], input[type="password"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="contact"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+            border-color: #6c63ff;
+            background-color: #fff;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background-color: #6c63ff;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #5a54e1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .file-input {
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-header {
+            text-align: center;
+            font-size: 24px;
+            color: #6c63ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="form-header">Registration Form</h1>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <table>
+                <tr class="form-group">
+                    <td><label for="name">Name:</label></td>
+                    <td><input type="text" name="name" id="name" required></td>
+                </tr>
+                <tr class="form-group">
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" name="email" id="email" required></td>
+                </tr>
+                <tr class="form-group">
+                    <td><label for="address">Address:</label></td>
+                    <td><textarea name="address" id="address" required></textarea></td>
+                </tr>
+                <tr class="form-group">
+                    <td><label for="contact">Contact:</label></td>
+                    <td><input type="text" name="contact" id="contact" required></td>
+                </tr>
+                <tr class="form-group">
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" name="password" id="password" required></td>
+                </tr>
+                <tr class="form-group">
+                    <td><label for="file_photo">Proof:</label></td>
+                    <td><input type="file" name="file_photo" class="file-input" required></td>
+                </tr>
+                <tr class="form-group">
+                    <td><label for="Subjectid">Subject ID:</label></td>
+                    <td>
+                        <select name="Subjectid" id="Subjectid" required>
+                            <option value="" disabled selected>---SELECT---</option>
+                            {% for i in subject %}
+                            <option value="{{i.id}}">{{i.subject_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Submit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

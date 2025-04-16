@@ -1,0 +1,42 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>District</td>
+                <td><input type="text" name="dis" id="dis"></td>
+            </tr>
+           
+            <tr>
+                <td colspan="2"><input type="submit" value="Add"></td>
+                
+            </tr>
+        </table>
+        <table border="1">
+            <tr>
+                <td>SL NO</td>
+                <td>District</td>
+            </tr>
+        {%for i in district %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.district_name}}</td>
+            <td><a href="{% url 'Admin:ddelete' i.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+
+   
+</body>
+</html>
+{% endblock content %}
