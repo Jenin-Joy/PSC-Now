@@ -134,12 +134,12 @@ def ajaxchatview(request):
     return render(request,"Teacher/ChatView.html",{"data":chat_data,"tid":int(tid)})
 
 def clearchat(request):
-    tbl_chat.objects.filter(Q(teacher_from=request.session["tid"]) & Q(user_to=request.GET.get("tid")) | (Q(user_from=request.GET.get("tid")) & Q(teacher_to=request.session["uid"]))).delete()
+    tbl_chat.objects.filter(Q(teacher_from=request.session["tid"]) & Q(user_to=request.GET.get("tid")) | (Q(user_from=request.GET.get("tid")) & Q(teacher_to=request.session["tid"]))).delete()
     return render(request,"Teacher/ClearChat.html",{"msg":"Chat Deleted Sucessfully...."})  
 
 
 def examinationdetails(request):
-    if "uid" in request.session:
+    if "tid" in request.session:
         exm=tbl_examination.objects.filter(teacher=request.session['tid'],examination_status=0)
         teacher=tbl_teacher.objects.get(id=request.session['tid'])
         if  request.method=="POST":
@@ -174,7 +174,7 @@ def viewresult(request, id):
     return render(request, "Teacher/ViewResult.html", {'user': user})
 
 def addquestions(request,id):
-    if "uid" in request.session:
+    if "tid" in request.session:
 
         que=tbl_questions.objects.filter(examination=id)
         if  request.method=="POST":
